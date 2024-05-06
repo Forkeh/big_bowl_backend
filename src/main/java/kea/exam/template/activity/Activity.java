@@ -22,6 +22,7 @@ public class Activity {
     private boolean isOpen;
 
     @ManyToOne
+    @JoinColumn(name = "type_id")
     private Type type;
 
 }

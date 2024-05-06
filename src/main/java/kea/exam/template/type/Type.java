@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Type {
 
     @Id
-    private String type;
+    private String name;
 
     private int price;
 }
