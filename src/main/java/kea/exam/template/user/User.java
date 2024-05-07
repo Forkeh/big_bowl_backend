@@ -26,4 +26,9 @@ public class User {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    public User(String id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 }

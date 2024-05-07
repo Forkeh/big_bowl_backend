@@ -22,4 +22,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(errorObject);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorObject> handleEntityNotFoundException(BadRequestException exception) {
+
+        ErrorObject errorObject = new ErrorObject();
+
+        errorObject.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorObject.setMessage(exception.getMessage());
+        errorObject.setTimestamp(LocalDate.now());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(errorObject);
+    }
 }
