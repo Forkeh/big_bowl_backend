@@ -38,4 +38,12 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     @JsonIgnore
     private Set<Booking> bookings = new HashSet<>();
+
+    public Product(String name, String imageURL, double price, int stock, Category category) {
+        this.name = name;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
+    }
 }
