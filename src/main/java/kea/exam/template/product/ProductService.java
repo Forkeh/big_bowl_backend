@@ -2,6 +2,7 @@ package kea.exam.template.product;
 
 import kea.exam.template.category.Category;
 import kea.exam.template.category.CategoryRepository;
+import kea.exam.template.exceptions.BadRequestException;
 import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.product.dto.ProductRequestDTO;
 import kea.exam.template.product.dto.ProductResponseDTO;
@@ -29,10 +30,19 @@ public class ProductService {
     }
 
     public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {
-        return toDTO(productRepository.save(toEntity(productRequestDTO)));
+        boolean existsInDb = productRepository.existsByNameContainingIgnoreCase(productRequestDTO.name());
+
+        //THOW HER
+        if (existsInDb)
+            throw new BadRequestException("Product with name " + productRequestDTO.name() + " already exists");
+
+
+        // SKAL IKKE KOMME HERNED
+        Product product = toEntity(productRequestDTO);
+        return toDTO(productRepository.save(product));
     }
 
-    private ProductResponseDTO toDTO(Product product) {
+    public ProductResponseDTO toDTO(Product product) {
         return new ProductResponseDTO(
                 product.getId(),
                 product.getName(),
