@@ -45,6 +45,8 @@ public class ProductService {
     }
 
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO productRequestDTO) {
+        Product productToUpdate = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(productRequestDTO.name(), id));
         return null;
     }
 

@@ -3,6 +3,7 @@ package kea.exam.template.product;
 import kea.exam.template.category.Category;
 import kea.exam.template.category.CategoryRepository;
 import kea.exam.template.exceptions.BadRequestException;
+import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.product.dto.ProductRequestDTO;
 import kea.exam.template.product.dto.ProductResponseDTO;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,8 @@ class ProductServiceTest {
                 "Andet"
         );
 
-        Mockito.when(productRepository.existsByNameContainingIgnoreCase(requestDTO.name())).thenReturn(true);
+        Mockito.when(productRepository.existsByNameContainingIgnoreCase(requestDTO.name()))
+                .thenReturn(true);
 
         // Act and Assert
         assertThrows(BadRequestException.class, () -> productService.createProduct(requestDTO));
@@ -65,9 +67,12 @@ class ProductServiceTest {
                 new Category("Andet")
         );
 
-        Mockito.when(productRepository.existsByNameContainingIgnoreCase(requestDTO.name())).thenReturn(false);
-        Mockito.when(categoryRepository.findFirstByNameContainsIgnoreCase(requestDTO.category())).thenReturn(Optional.of(new Category("Andet")));
-        Mockito.when(productRepository.save(Mockito.any())).thenReturn(product);
+        Mockito.when(productRepository.existsByNameContainingIgnoreCase(requestDTO.name()))
+                .thenReturn(false);
+        Mockito.when(categoryRepository.findFirstByNameContainsIgnoreCase(requestDTO.category()))
+                .thenReturn(Optional.of(new Category("Andet")));
+        Mockito.when(productRepository.save(Mockito.any()))
+                .thenReturn(product);
 
         // Act
         ProductResponseDTO result = productService.createProduct(requestDTO);
@@ -80,7 +85,23 @@ class ProductServiceTest {
 
     }
 
+    @Test
+    void updateProductThatDoesNotExit() {
+        // Arrange
+        Long id = 10L;
 
-    
+        var requestDTO = new ProductRequestDTO(
+                "Fries",
+                "www.image.com",
+                2,
+                2,
+                "Andet"
+        );
 
+        Mockito.when(productRepository.findById(id))
+                .thenReturn(Optional.empty());
+
+        // Act and Assert
+        assertThrows(EntityNotFoundException.class, () -> productService.updateProduct(id, requestDTO));
+    }
 }
