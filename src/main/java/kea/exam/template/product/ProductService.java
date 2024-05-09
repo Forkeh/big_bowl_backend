@@ -47,7 +47,17 @@ public class ProductService {
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO productRequestDTO) {
         Product productToUpdate = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(productRequestDTO.name(), id));
-        return null;
+
+        Category category = categoryRepository.findFirstByNameContainsIgnoreCase(productRequestDTO.category())
+                .orElseThrow(() -> new EntityNotFoundException("Category", productRequestDTO.category()));
+
+        productToUpdate.setName(productRequestDTO.name());
+        productToUpdate.setImageURL(productRequestDTO.image());
+        productToUpdate.setCategory(category);
+        productToUpdate.setPrice(productRequestDTO.price());
+        productToUpdate.setStock(productRequestDTO.stock());
+
+        return toDTO(productRepository.save(productToUpdate));
     }
 
     public ProductResponseDTO toDTO(Product product) {

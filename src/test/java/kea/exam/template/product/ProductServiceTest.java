@@ -58,7 +58,7 @@ class ProductServiceTest {
                 "Andet"
         );
 
-        var product = new Product(
+        var productInDB = new Product(
                 1L,
                 requestDTO.name(),
                 requestDTO.image(),
@@ -72,16 +72,16 @@ class ProductServiceTest {
         Mockito.when(categoryRepository.findFirstByNameContainsIgnoreCase(requestDTO.category()))
                 .thenReturn(Optional.of(new Category("Andet")));
         Mockito.when(productRepository.save(Mockito.any()))
-                .thenReturn(product);
+                .thenReturn(productInDB);
 
         // Act
         ProductResponseDTO result = productService.createProduct(requestDTO);
 
         // Assert
-        assertEquals(result.id(), product.getId());
-        assertEquals(result.image(), product.getImageURL());
-        assertEquals(result.price(), product.getPrice());
-        assertEquals(result.stock(), product.getStock());
+        assertEquals(result.id(), productInDB.getId());
+        assertEquals(result.image(), productInDB.getImageURL());
+        assertEquals(result.price(), productInDB.getPrice());
+        assertEquals(result.stock(), productInDB.getStock());
 
     }
 
@@ -104,4 +104,80 @@ class ProductServiceTest {
         // Act and Assert
         assertThrows(EntityNotFoundException.class, () -> productService.updateProduct(id, requestDTO));
     }
+
+    @Test
+    void updateProductThatExists() {
+        // Arrange
+        Long id = 10L;
+
+        var requestDTO = new ProductRequestDTO(
+                "Fries",
+                "www.image.com",
+                2,
+                2,
+                "Andet"
+        );
+
+        var productInDB = new Product(
+                id,
+                "Chips",
+                "www.face.com",
+                4,
+                4,
+                new Category("Snacks")
+        );
+
+        Mockito.when(productRepository.findById(id))
+                .thenReturn(Optional.of(productInDB));
+
+        Mockito.when(categoryRepository.findFirstByNameContainsIgnoreCase(requestDTO.category()))
+                .thenReturn(Optional.of(new Category("Andet")));
+
+        Mockito.when(productRepository.save(Mockito.any()))
+                .thenReturn(productInDB);
+
+        // Act
+        ProductResponseDTO result = productService.updateProduct(id, requestDTO);
+
+        // Assert
+        assertEquals(requestDTO.name(), result.name());
+        assertEquals(requestDTO.image(), result.image());
+        assertEquals(requestDTO.price(), result.price());
+        assertEquals(requestDTO.stock(), result.stock());
+        assertEquals(requestDTO.category(), result.category());
+    }
+
+    @Test
+    void updateProductThatExistsButCategoryDoesNotExist() {
+        // Arrange
+        Long id = 10L;
+
+        var requestDTO = new ProductRequestDTO(
+                "Fries",
+                "www.image.com",
+                2,
+                2,
+                "Andet"
+        );
+
+        var productInDB = new Product(
+                id,
+                "Chips",
+                "www.face.com",
+                4,
+                4,
+                new Category("Snacks")
+        );
+
+        Mockito.when(productRepository.findById(id))
+                .thenReturn(Optional.of(productInDB));
+
+        Mockito.when(categoryRepository.findFirstByNameContainsIgnoreCase(requestDTO.category()))
+                .thenReturn(Optional.empty());
+
+        // Act and Assert
+        assertThrows(EntityNotFoundException.class, () -> productService.updateProduct(id, requestDTO));
+
+    }
+
 }
