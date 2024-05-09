@@ -7,6 +7,8 @@ import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.product.dto.ProductRequestDTO;
 import kea.exam.template.product.dto.ProductResponseDTO;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -40,6 +42,10 @@ public class ProductService {
         // SKAL IKKE KOMME HERNED
         Product product = toEntity(productRequestDTO);
         return toDTO(productRepository.save(product));
+    }
+
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO productRequestDTO) {
+        return null;
     }
 
     public ProductResponseDTO toDTO(Product product) {
