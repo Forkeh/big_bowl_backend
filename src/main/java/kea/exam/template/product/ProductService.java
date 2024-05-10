@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -28,7 +29,13 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Page<ProductResponseDTO> getAllProducts(Integer pageNum, Integer pageSize, String sortDir, String sortBy) {
+    public Page<ProductResponseDTO> getAllProducts(
+            Integer pageNum,
+            Integer pageSize,
+            String sortDir,
+            String sortBy,
+            Optional<String> filterBy
+    ) {
 
         Pageable pageable = PageRequest.of(
                 pageNum,
@@ -37,16 +44,17 @@ public class ProductService {
                 sortBy
         );
 
+        // if filter og search
+
+        if (filterBy.isPresent()){
+            return productRepository.findAllByCategoryNameContains(pageable, filterBy.get()).map(this::toDTO);
+        }
+
+        // if search
+
+
+
         return productRepository.findAll(pageable).map(this::toDTO);
-
-
-
-
-
-        /*return productRepository.findAll()
-                .stream()
-                .map(this::toDTO)
-                .toList();*/
     }
 
     public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {

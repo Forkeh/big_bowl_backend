@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("products")
@@ -26,9 +27,10 @@ public class ProductController {
             @RequestParam Integer pageIndex,
             @RequestParam Integer pageSize,
             @RequestParam String sortDir,
-            @RequestParam String sortBy
+            @RequestParam String sortBy,
+            @RequestParam Optional<String> filterBy
     ) {
-        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize, sortDir, sortBy));
+        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize, sortDir, sortBy, filterBy));
     }
 
 
