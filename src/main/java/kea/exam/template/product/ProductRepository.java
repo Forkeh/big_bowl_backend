@@ -8,5 +8,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     boolean existsByNameContainingIgnoreCase(String name);
 
-    Page<Product> findAllByCategoryNameContains(Pageable pageable, String categoryName);
+    Page<Product> findAllByCategoryNameContainsIgnoreCase(Pageable pageable, String categoryName);
+
+    Page<Product> findAllByNameContainsIgnoreCase(Pageable pageable, String name);
+
+    Page<Product> findAllByNameContainsIgnoreCaseAndCategoryNameContainsIgnoreCase(Pageable pageable, String name, String categoryName);
 }

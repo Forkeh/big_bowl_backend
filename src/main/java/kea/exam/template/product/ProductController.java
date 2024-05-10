@@ -28,9 +28,10 @@ public class ProductController {
             @RequestParam Integer pageSize,
             @RequestParam String sortDir,
             @RequestParam String sortBy,
-            @RequestParam Optional<String> filterBy
+            @RequestParam Optional<String> filterBy,
+            @RequestParam Optional<String> searchBy
     ) {
-        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize, sortDir, sortBy, filterBy));
+        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize, sortDir, sortBy, filterBy, searchBy));
     }
 
 

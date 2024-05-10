@@ -34,7 +34,8 @@ public class ProductService {
             Integer pageSize,
             String sortDir,
             String sortBy,
-            Optional<String> filterBy
+            Optional<String> filterBy,
+            Optional<String> searchBy
     ) {
 
         Pageable pageable = PageRequest.of(
@@ -44,15 +45,22 @@ public class ProductService {
                 sortBy
         );
 
-        // if filter og search
 
-        if (filterBy.isPresent()){
-            return productRepository.findAllByCategoryNameContains(pageable, filterBy.get()).map(this::toDTO);
+        if (searchBy.isPresent() && filterBy.isPresent()) {
+            return productRepository.findAllByNameContainsIgnoreCaseAndCategoryNameContainsIgnoreCase(
+                    pageable,
+                    searchBy.get(),
+                    filterBy.get()
+                    ).map(this::toDTO);
         }
 
-        // if search
+        if (filterBy.isPresent()) {
+            return productRepository.findAllByCategoryNameContainsIgnoreCase(pageable, filterBy.get()).map(this::toDTO);
+        }
 
-
+        if (searchBy.isPresent()) {
+            return productRepository.findAllByNameContainsIgnoreCase(pageable, searchBy.get()).map(this::toDTO);
+        }
 
         return productRepository.findAll(pageable).map(this::toDTO);
     }
