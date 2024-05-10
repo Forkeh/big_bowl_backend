@@ -9,6 +9,7 @@ import kea.exam.template.product.dto.ProductResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,10 +28,13 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Page<ProductResponseDTO> getAllProducts(Integer pageNum, Integer pageSize) {
+    public Page<ProductResponseDTO> getAllProducts(Integer pageNum, Integer pageSize, String sortDir, String sortBy) {
+
         Pageable pageable = PageRequest.of(
                 pageNum,
-                pageSize
+                pageSize,
+                Sort.Direction.valueOf(sortDir),
+                sortBy
         );
 
         return productRepository.findAll(pageable).map(this::toDTO);

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("products")
@@ -24,10 +23,12 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
-            @RequestParam(defaultValue = "0", required = false) Integer pageNum,
-            @RequestParam(defaultValue = "10", required = false) Integer pageSize
+            @RequestParam Integer pageIndex,
+            @RequestParam Integer pageSize,
+            @RequestParam String sortDir,
+            @RequestParam String sortBy
     ) {
-        return ResponseEntity.ok(productService.getAllProducts(pageNum, pageSize));
+        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize, sortDir, sortBy));
     }
 
 
