@@ -3,6 +3,7 @@ package kea.exam.template.product;
 import jakarta.validation.Valid;
 import kea.exam.template.product.dto.ProductRequestDTO;
 import kea.exam.template.product.dto.ProductResponseDTO;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,8 +23,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponseDTO>> getAllProducts() {
-        return ResponseEntity.ok(productService.getAllProducts());
+    public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
+            @RequestParam(defaultValue = "0", required = false) Integer pageNum,
+            @RequestParam(defaultValue = "10", required = false) Integer pageSize
+    ) {
+        return ResponseEntity.ok(productService.getAllProducts(pageNum, pageSize));
     }
 
 
