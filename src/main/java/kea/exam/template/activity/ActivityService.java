@@ -1,7 +1,9 @@
 package kea.exam.template.activity;
 
 
+import kea.exam.template.activity.dto.ActivityRequestDTO;
 import kea.exam.template.activity.dto.ActivityResponseDTO;
+import kea.exam.template.exceptions.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +48,15 @@ public class ActivityService {
 
     }
 
+    public ActivityResponseDTO updateIsActivityOpen(Long id, ActivityRequestDTO activityRequestDTO) {
+        Activity activityInDB = activityRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Activity", id));
+
+        activityInDB.setOpen(activityRequestDTO.isOpen());
+        activityRepository.save(activityInDB);
+        return toDTO(activityInDB);
+    }
+
 
     private ActivityResponseDTO toDTO(Activity activity) {
         return new ActivityResponseDTO(
@@ -60,4 +71,6 @@ public class ActivityService {
                         .getPrice()
         );
     }
+
+
 }
