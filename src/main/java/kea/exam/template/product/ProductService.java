@@ -20,7 +20,6 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
-
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
@@ -48,21 +47,25 @@ public class ProductService {
 
         if (searchBy.isPresent() && filterBy.isPresent()) {
             return productRepository.findAllByNameContainsIgnoreCaseAndCategoryNameContainsIgnoreCase(
-                    pageable,
-                    searchBy.get(),
-                    filterBy.get()
-                    ).map(this::toDTO);
+                            pageable,
+                            searchBy.get(),
+                            filterBy.get()
+                    )
+                    .map(this::toDTO);
         }
 
         if (filterBy.isPresent()) {
-            return productRepository.findAllByCategoryNameContainsIgnoreCase(pageable, filterBy.get()).map(this::toDTO);
+            return productRepository.findAllByCategoryNameContainsIgnoreCase(pageable, filterBy.get())
+                    .map(this::toDTO);
         }
 
         if (searchBy.isPresent()) {
-            return productRepository.findAllByNameContainsIgnoreCase(pageable, searchBy.get()).map(this::toDTO);
+            return productRepository.findAllByNameContainsIgnoreCase(pageable, searchBy.get())
+                    .map(this::toDTO);
         }
 
-        return productRepository.findAll(pageable).map(this::toDTO);
+        return productRepository.findAll(pageable)
+                .map(this::toDTO);
     }
 
     public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {

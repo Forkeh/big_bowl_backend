@@ -17,5 +17,5 @@ public class Type {
     @Id
     private String name;
 
-    private int price;
+    private Integer price;
 }

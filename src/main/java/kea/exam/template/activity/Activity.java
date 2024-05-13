@@ -25,4 +25,9 @@ public class Activity {
     @JoinColumn(name = "type_id")
     private Type type;
 
+    public Activity(String name, boolean isOpen, Type type) {
+        this.name = name;
+        this.isOpen = isOpen;
+        this.type = type;
+    }
 }

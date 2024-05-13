@@ -1,5 +1,7 @@
 package kea.exam.template.config;
 
+import kea.exam.template.activity.Activity;
+import kea.exam.template.activity.ActivityRepository;
 import kea.exam.template.category.Category;
 import kea.exam.template.category.CategoryRepository;
 import kea.exam.template.product.Product;
@@ -21,15 +23,18 @@ public class InitData implements ApplicationRunner {
     private final List<Category> categories = new ArrayList<>();
     private final List<Type> types = new ArrayList<>();
     private final List<Product> products = new ArrayList<>();
+    private final List<Activity> activities = new ArrayList<>();
 
     private final TypeRepository typeRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final ActivityRepository activityRepository;
 
-    public InitData(TypeRepository typeRepository, CategoryRepository categoryRepository, ProductRepository productRepository) {
+    public InitData(TypeRepository typeRepository, CategoryRepository categoryRepository, ProductRepository productRepository, ActivityRepository activityRepository) {
         this.typeRepository = typeRepository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.activityRepository = activityRepository;
     }
 
 
@@ -45,6 +50,7 @@ public class InitData implements ApplicationRunner {
         createType();
         createCategory();
         createProducts();
+        createActivities();
     }
 
     private void createCategory() {
@@ -82,5 +88,46 @@ public class InitData implements ApplicationRunner {
 
         productRepository.saveAll(products);
 
+    }
+
+    private void createActivities() {
+        activities.add(new Activity("Bowling lane 1", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 2", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 3", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 4", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 5", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 6", false, types.get(0)));
+        activities.add(new Activity("Bowling lane 7", false, types.get(0)));
+        activities.add(new Activity("Bowling lane 8", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 9", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 10", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 11", false, types.get(0)));
+        activities.add(new Activity("Bowling lane 12", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 13", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 14", false, types.get(0)));
+        activities.add(new Activity("Bowling lane 15", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 16", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 17", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 18", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 19", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 20", true, types.get(0)));
+        activities.add(new Activity("Bowling lane 21", true, types.get(1)));
+        activities.add(new Activity("Bowling lane 22", true, types.get(1)));
+        activities.add(new Activity("Bowling lane 23", true, types.get(1)));
+        activities.add(new Activity("Bowling lane 24", false, types.get(1)));
+
+        activities.add(new Activity("Air Hockey 1", true, types.get(2)));
+        activities.add(new Activity("Air Hockey 2", true, types.get(2)));
+        activities.add(new Activity("Air Hockey 3", false, types.get(2)));
+        activities.add(new Activity("Air Hockey 4", true, types.get(2)));
+
+        activities.add(new Activity("Dining 1", true, types.get(3)));
+        activities.add(new Activity("Dining 2", true, types.get(3)));
+        activities.add(new Activity("Dining 3", false, types.get(3)));
+        activities.add(new Activity("Dining 4", true, types.get(3)));
+        activities.add(new Activity("Dining 5", true, types.get(3)));
+        activities.add(new Activity("Dining 6", true, types.get(3)));
+
+        activityRepository.saveAll(activities);
     }
 }
