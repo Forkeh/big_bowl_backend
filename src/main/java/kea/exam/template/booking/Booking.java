@@ -48,4 +48,13 @@ public class Booking {
 
     @ManyToMany
     private Set<Product> products = new HashSet<>();
+
+    public Booking(double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
+        this.totalPrice = totalPrice;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.user = user;
+        this.activity = activity;
+        this.participants = participants;
+    }
 }

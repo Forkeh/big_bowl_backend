@@ -25,4 +25,8 @@ public class Participant {
     @ManyToMany(mappedBy = "participants")
     @JsonIgnore
     private Set<Booking> bookings = new HashSet<>();
+
+    public Participant(String name) {
+        this.name = name;
+    }
 }
