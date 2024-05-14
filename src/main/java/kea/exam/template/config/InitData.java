@@ -176,6 +176,7 @@ public class InitData implements ApplicationRunner {
         users.add(new User("j4k35h34k5h3k4h5k34", "Elijah", "White"));
         users.add(new User("kj34h5kj345hk3h4k5h", "Evelyn", "Harris"));
         users.add(new User("sdkjfhsdkfjwejf3483", "Alexander", "Clark"));
+        users.add(new User("user_2g8I0Dw3Bv22Ovm6Pm1cDxtWsU7", "Brian", "Blume"));
 
         userRepository.saveAll(users);
     }
@@ -197,14 +198,24 @@ public class InitData implements ApplicationRunner {
 
     private void createBookings() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime tomorrow = LocalDateTime.now().plusDays(1);
-        LocalDateTime dayAfterTomorrow = LocalDateTime.now().plusDays(2);
-        LocalDateTime threeDays = LocalDateTime.now().plusDays(3);
-        LocalDateTime fourDays = LocalDateTime.now().plusDays(3);
-        LocalDateTime week = LocalDateTime.now().plusWeeks(1);
-        LocalDateTime weekAndADay = LocalDateTime.now().plusWeeks(1).plusDays(1);
-        LocalDateTime weekAndTwoDays = LocalDateTime.now().plusWeeks(1).plusDays(2);
-        LocalDateTime twoWeeks = LocalDateTime.now().plusWeeks(2);
+        LocalDateTime tomorrow = LocalDateTime.now()
+                .plusDays(1);
+        LocalDateTime dayAfterTomorrow = LocalDateTime.now()
+                .plusDays(2);
+        LocalDateTime threeDays = LocalDateTime.now()
+                .plusDays(3);
+        LocalDateTime fourDays = LocalDateTime.now()
+                .plusDays(3);
+        LocalDateTime week = LocalDateTime.now()
+                .plusWeeks(1);
+        LocalDateTime weekAndADay = LocalDateTime.now()
+                .plusWeeks(1)
+                .plusDays(1);
+        LocalDateTime weekAndTwoDays = LocalDateTime.now()
+                .plusWeeks(1)
+                .plusDays(2);
+        LocalDateTime twoWeeks = LocalDateTime.now()
+                .plusWeeks(2);
 
         bookings.add(new Booking(400, tomorrow, tomorrow.plusHours(2), users.get(2), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
         bookings.add(new Booking(401, dayAfterTomorrow, dayAfterTomorrow.plusHours(1), users.get(3), activities.get(1), new HashSet<>(Set.of(participants.get(2), participants.get(4)))));
@@ -215,7 +226,9 @@ public class InitData implements ApplicationRunner {
         bookings.add(new Booking(406, weekAndTwoDays, weekAndTwoDays.plusHours(2), users.get(8), activities.get(0), new HashSet<>(Set.of(participants.get(2), participants.get(9)))));
         bookings.add(new Booking(407, twoWeeks, twoWeeks.plusHours(1), users.get(9), activities.get(1), new HashSet<>(Set.of(participants.get(3), participants.get(0)))));
         bookings.add(new Booking(408, now.plusHours(5), now.plusHours(7), users.get(0), activities.get(2), new HashSet<>(Set.of(participants.get(4), participants.get(5)))));
-        bookings.add(new Booking(409, now.plusDays(3).plusHours(2), now.plusDays(3).plusHours(4), users.get(1), activities.get(3), new HashSet<>(Set.of(participants.get(6), participants.get(7)))));
+        bookings.add(new Booking(409, now.plusDays(3)
+                .plusHours(2), now.plusDays(3)
+                .plusHours(4), users.get(1), activities.get(3), new HashSet<>(Set.of(participants.get(6), participants.get(7)))));
         bookings.add(new Booking(410, tomorrow.plusHours(3), tomorrow.plusHours(6), users.get(2), activities.get(1), new HashSet<>(Set.of(participants.get(0), participants.get(2), participants.get(4)))));
         bookings.add(new Booking(411, dayAfterTomorrow.plusHours(1), dayAfterTomorrow.plusHours(4), users.get(3), activities.get(2), new HashSet<>(Set.of(participants.get(1), participants.get(3), participants.get(5)))));
         bookings.add(new Booking(412, threeDays.plusHours(4), threeDays.plusHours(7), users.get(4), activities.get(3), new HashSet<>(Set.of(participants.get(2), participants.get(4), participants.get(6)))));
@@ -224,8 +237,14 @@ public class InitData implements ApplicationRunner {
         bookings.add(new Booking(415, weekAndADay.plusHours(2), weekAndADay.plusHours(5), users.get(7), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
         bookings.add(new Booking(416, weekAndTwoDays.plusHours(3), weekAndTwoDays.plusHours(6), users.get(8), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
         bookings.add(new Booking(417, twoWeeks.plusHours(1), twoWeeks.plusHours(4), users.get(9), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
-        bookings.add(new Booking(418, now.plusDays(1).plusHours(2), now.plusDays(1).plusHours(5), users.get(0), activities.get(4), new HashSet<>(Set.of(participants.get(8), participants.get(0), participants.get(2), participants.get(4)))));
-        bookings.add(new Booking(419, now.plusDays(2).plusHours(3), now.plusDays(2).plusHours(6), users.get(1), activities.get(0), new HashSet<>(Set.of(participants.get(9), participants.get(1), participants.get(3), participants.get(5)))));
+        bookings.add(new Booking(418, now.plusDays(1)
+                .plusHours(2), now.plusDays(1)
+                .plusHours(5), users.get(0), activities.get(4), new HashSet<>(Set.of(participants.get(8), participants.get(0), participants.get(2), participants.get(4)))));
+        bookings.add(new Booking(419, now.plusDays(2)
+                .plusHours(3), now.plusDays(2)
+                .plusHours(6), users.get(1), activities.get(0), new HashSet<>(Set.of(participants.get(9), participants.get(1), participants.get(3), participants.get(5)))));
+        bookings.add(new Booking(400, tomorrow, tomorrow.plusHours(2), users.get(21), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
+        bookings.add(new Booking(401, dayAfterTomorrow, dayAfterTomorrow.plusHours(1), users.get(21), activities.get(1), new HashSet<>(Set.of(participants.get(2), participants.get(4)))));
 
         bookingRepository.saveAll(bookings);
     }

@@ -1,15 +1,16 @@
 package kea.exam.template.booking;
 
 import kea.exam.template.activity.ActivityService;
+import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.participant.Participant;
+import kea.exam.template.participant.ParticipantRepository;
 import kea.exam.template.product.ProductService;
 import kea.exam.template.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BookingService {
@@ -19,13 +20,15 @@ public class BookingService {
     private final UserService userService;
     private final ActivityService activityService;
     private final ProductService productService;
+    private final ParticipantRepository participantRepository;
 
 
-    public BookingService(BookingRepository bookingRepository, UserService userService, ActivityService activityService, ProductService productService) {
+    public BookingService(BookingRepository bookingRepository, UserService userService, ActivityService activityService, ProductService productService, ParticipantRepository participantRepository) {
         this.bookingRepository = bookingRepository;
         this.userService = userService;
         this.activityService = activityService;
         this.productService = productService;
+        this.participantRepository = participantRepository;
     }
 
     public List<BookingResponseDTO> getAllBookings() {
@@ -65,5 +68,24 @@ public class BookingService {
                 .stream()
                 .map(this::toDTO)
                 .toList();
+    }
+
+    public BookingResponseDTO updateBookingParticipants(Long id, List<String> participantNames) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Booking", id));
+
+        Set<Participant> newParticipants = new HashSet<>();
+
+        for (String name : participantNames) {
+            Participant participant = participantRepository.findByName(name)
+                    .orElse(participantRepository.save(new Participant(name)));
+
+            newParticipants.add(participant);
+        }
+
+        booking.setParticipants(newParticipants);
+
+        bookingRepository.save(booking);
+        return toDTO(booking);
     }
 }

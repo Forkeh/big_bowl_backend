@@ -1,11 +1,9 @@
 package kea.exam.template.booking;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -25,11 +23,16 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getAllBookings());
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping("users/{id}")
     public ResponseEntity<List<BookingResponseDTO>> getBookingsByUserId(@PathVariable String id) {
 
         return ResponseEntity.ok(bookingService.getBookingsByUserId(id));
 
+    }
+
+    @PatchMapping("{id}/participants")
+    public ResponseEntity<BookingResponseDTO> updateBookingParticipants(@PathVariable Long id, @RequestBody List<String> participantNames) {
+        return ResponseEntity.ok(bookingService.updateBookingParticipants(id, participantNames));
     }
 
 }
