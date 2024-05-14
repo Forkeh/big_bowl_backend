@@ -30,7 +30,9 @@ public class BookingService {
 
     public List<BookingResponseDTO> getAllBookings() {
         return bookingRepository.findAll()
-                .stream().map(this::toDTO).toList();
+                .stream()
+                .map(this::toDTO)
+                .toList();
     }
 
 
@@ -42,13 +44,26 @@ public class BookingService {
                 formatDate(entity.getEndTime()),
                 userService.toDTO(entity.getUser()),
                 activityService.toDTO(entity.getActivity()),
-                entity.getParticipants().stream().map(Participant::getName).toList(),
-                entity.getProducts().stream().map(productService::toDTO).toList()
+                entity.getParticipants()
+                        .stream()
+                        .map(Participant::getName)
+                        .toList(),
+                entity.getProducts()
+                        .stream()
+                        .map(productService::toDTO)
+                        .toList()
         );
     }
 
     private String formatDate(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         return dateTime.format(formatter);
+    }
+
+    public List<BookingResponseDTO> getBookingsByUserId(String id) {
+        return bookingRepository.findBookingsByUserId(id)
+                .stream()
+                .map(this::toDTO)
+                .toList();
     }
 }
