@@ -77,10 +77,14 @@ public class BookingService {
         Set<Participant> newParticipants = new HashSet<>();
 
         for (String name : participantNames) {
-            Participant participant = participantRepository.findByName(name)
-                    .orElse(participantRepository.save(new Participant(name)));
+            Optional<Participant> participant = participantRepository.findByName(name);
 
-            newParticipants.add(participant);
+            if (participant.isEmpty()) {
+                var created = participantRepository.save(new Participant(name));
+                newParticipants.add(created);
+            } else {
+                newParticipants.add(participant.get());
+            }
         }
 
         booking.setParticipants(newParticipants);
