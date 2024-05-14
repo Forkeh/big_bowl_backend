@@ -218,7 +218,7 @@ public class InitData implements ApplicationRunner {
         bookings.add(new Booking(409, now.plusDays(3).plusHours(2), now.plusDays(3).plusHours(4), users.get(1), activities.get(3), new HashSet<>(Set.of(participants.get(6), participants.get(7)))));
         bookings.add(new Booking(410, tomorrow.plusHours(3), tomorrow.plusHours(6), users.get(2), activities.get(1), new HashSet<>(Set.of(participants.get(0), participants.get(2), participants.get(4)))));
         bookings.add(new Booking(411, dayAfterTomorrow.plusHours(1), dayAfterTomorrow.plusHours(4), users.get(3), activities.get(2), new HashSet<>(Set.of(participants.get(1), participants.get(3), participants.get(5)))));
-        bookings.add(new Booking(412, threeDays.plusHours(2), threeDays.plusHours(5), users.get(4), activities.get(3), new HashSet<>(Set.of(participants.get(2), participants.get(4), participants.get(6)))));
+        bookings.add(new Booking(412, threeDays.plusHours(4), threeDays.plusHours(7), users.get(4), activities.get(3), new HashSet<>(Set.of(participants.get(2), participants.get(4), participants.get(6)))));
         bookings.add(new Booking(413, fourDays.plusHours(3), fourDays.plusHours(6), users.get(5), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
         bookings.add(new Booking(414, week.plusHours(1), week.plusHours(4), users.get(6), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
         bookings.add(new Booking(415, weekAndADay.plusHours(2), weekAndADay.plusHours(5), users.get(7), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));

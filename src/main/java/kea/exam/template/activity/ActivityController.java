@@ -31,6 +31,13 @@ public class ActivityController {
         return ResponseEntity.ok(activityService.getAllActivities(pageIndex, pageSize, sortDir, sortBy, filterBy));
     }
 
+    @GetMapping("calender")
+    public ResponseEntity<List<ActivityResponseDTO>> getAllActivitiesCalender(
+            @RequestParam Optional<String> filterBy
+    ) {
+        return ResponseEntity.ok(activityService.getAllActivities(filterBy));
+    }
+
 
     @PatchMapping("{id}")
     public ResponseEntity<ActivityResponseDTO> updateIsActivityOpen(@PathVariable("id") Long id, @RequestBody ActivityRequestDTO activityRequestDTO) {

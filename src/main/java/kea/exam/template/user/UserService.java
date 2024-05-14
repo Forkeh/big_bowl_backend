@@ -32,7 +32,7 @@ public class UserService {
     }
 
 
-    private UserDTO toDTO(User entity) {
+    public UserDTO toDTO(User entity) {
         return new UserDTO(
                 entity.getId(),
                 entity.getFirstName(),

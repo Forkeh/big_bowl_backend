@@ -48,6 +48,21 @@ public class ActivityService {
 
     }
 
+    public List<ActivityResponseDTO> getAllActivities(
+            Optional<String> filterBy
+    ) {
+
+        if (filterBy.isPresent()){
+            return activityRepository.findAllByTypeNameContainsIgnoreCase(filterBy.get())
+                    .stream()
+                    .map(this::toDTO)
+                    .toList();
+        }
+
+        return activityRepository.findAll()
+                .stream().map(this::toDTO).toList();
+    }
+
     public ActivityResponseDTO updateIsActivityOpen(Long id, ActivityRequestDTO activityRequestDTO) {
         Activity activityInDB = activityRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Activity", id));
@@ -58,7 +73,7 @@ public class ActivityService {
     }
 
 
-    private ActivityResponseDTO toDTO(Activity activity) {
+    public ActivityResponseDTO toDTO(Activity activity) {
         return new ActivityResponseDTO(
                 activity.getId(),
                 activity.getName(),
