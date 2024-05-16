@@ -4,6 +4,9 @@ import kea.exam.template.activity.Activity;
 import kea.exam.template.activity.ActivityRepository;
 import kea.exam.template.booking.Booking;
 import kea.exam.template.booking.BookingRepository;
+import kea.exam.template.booking_product.BookingProduct;
+import kea.exam.template.booking_product.BookingProductKey;
+import kea.exam.template.booking_product.BookingProductRepository;
 import kea.exam.template.category.Category;
 import kea.exam.template.category.CategoryRepository;
 import kea.exam.template.participant.Participant;
@@ -35,6 +38,7 @@ public class InitData implements ApplicationRunner {
     private final List<Booking> bookings = new ArrayList<>();
     private final List<User> users = new ArrayList<>();
     private final List<Participant> participants = new ArrayList<>();
+    List<BookingProduct> bookingProducts = new ArrayList<>();
 
     private final TypeRepository typeRepository;
     private final CategoryRepository categoryRepository;
@@ -43,10 +47,12 @@ public class InitData implements ApplicationRunner {
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
     private final ParticipantRepository participantRepository;
+    private final BookingProductRepository bookingProductRepository;
 
 
     public InitData(TypeRepository typeRepository, CategoryRepository categoryRepository, ProductRepository productRepository, ActivityRepository activityRepository,
-                    UserRepository userRepository, BookingRepository bookingRepository, ParticipantRepository participantRepository) {
+                    UserRepository userRepository, BookingRepository bookingRepository, ParticipantRepository participantRepository,
+                    BookingProductRepository bookingProductRepository) {
         this.typeRepository = typeRepository;
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
@@ -54,6 +60,7 @@ public class InitData implements ApplicationRunner {
         this.userRepository = userRepository;
         this.bookingRepository = bookingRepository;
         this.participantRepository = participantRepository;
+        this.bookingProductRepository = bookingProductRepository;
     }
 
 
@@ -73,6 +80,7 @@ public class InitData implements ApplicationRunner {
         createUsers();
         createParticipants();
         createBookings();
+        createBookingProducts();
     }
 
     private void createCategory() {
@@ -258,5 +266,15 @@ public class InitData implements ApplicationRunner {
 
 
         bookingRepository.saveAll(bookings);
+    }
+
+    private void createBookingProducts() {
+        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(2), bookings.get(26)), 4));
+        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(4), bookings.get(26)), 1));
+        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(3), bookings.get(26)), 2));
+        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(2), bookings.get(26)), 3));
+        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(7), bookings.get(26)), 1));
+
+        bookingProductRepository.saveAll(bookingProducts);
     }
 }
