@@ -4,7 +4,9 @@ import kea.exam.template.activity.ActivityService;
 import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.participant.Participant;
 import kea.exam.template.participant.ParticipantRepository;
+import kea.exam.template.product.Product;
 import kea.exam.template.product.ProductService;
+import kea.exam.template.product.dto.ProductBookingResponseDTO;
 import kea.exam.template.user.UserService;
 import org.springframework.stereotype.Service;
 
@@ -53,10 +55,11 @@ public class BookingService {
                         .toList(),
                 entity.getProducts()
                         .stream()
-                        .map(productService::toDTO)
+                        .map(bookingProduct -> productService.productBookingResponseDTO(bookingProduct.getQuantity(), bookingProduct.getProduct()))
                         .toList()
         );
     }
+
 
     private String formatDate(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");

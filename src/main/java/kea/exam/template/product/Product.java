@@ -4,6 +4,7 @@ package kea.exam.template.product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import kea.exam.template.booking.Booking;
+import kea.exam.template.booking_product.Booking_Product;
 import kea.exam.template.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,9 +37,13 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    @ManyToMany(mappedBy = "products")
+    /*@ManyToMany(mappedBy = "products")
     @JsonIgnore
-    private Set<Booking> bookings = new HashSet<>();
+    private Set<Booking> bookings = new HashSet<>();*/
+
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private Set<Booking_Product> bookings = new HashSet<>();
 
     public Product(String name, String imageURL, double price, int stock, Category category) {
         this.name = name;

@@ -4,6 +4,7 @@ import kea.exam.template.category.Category;
 import kea.exam.template.category.CategoryRepository;
 import kea.exam.template.exceptions.BadRequestException;
 import kea.exam.template.exceptions.EntityNotFoundException;
+import kea.exam.template.product.dto.ProductBookingResponseDTO;
 import kea.exam.template.product.dto.ProductRequestDTO;
 import kea.exam.template.product.dto.ProductResponseDTO;
 import org.springframework.data.domain.Page;
@@ -106,6 +107,15 @@ public class ProductService {
                 product.getStock(),
                 product.getCategory()
                         .getName()
+        );
+    }
+
+    public ProductBookingResponseDTO productBookingResponseDTO(int quantity, Product entity) {
+        return new ProductBookingResponseDTO(
+                entity.getId(),
+                entity.getName(),
+                entity.getImageURL(),
+                quantity
         );
     }
 
