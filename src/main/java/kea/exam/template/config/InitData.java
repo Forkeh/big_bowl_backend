@@ -177,6 +177,7 @@ public class InitData implements ApplicationRunner {
         users.add(new User("kj34h5kj345hk3h4k5h", "Evelyn", "Harris"));
         users.add(new User("sdkjfhsdkfjwejf3483", "Alexander", "Clark"));
         users.add(new User("user_2g8I0Dw3Bv22Ovm6Pm1cDxtWsU7", "Brian", "Blume"));
+        users.add(new User("user_2g8ESKm09FPKTgRmajrfw2QQ617", "Ali", "Amier"));
 
         userRepository.saveAll(users);
     }
@@ -245,6 +246,16 @@ public class InitData implements ApplicationRunner {
                 .plusHours(6), users.get(1), activities.get(0), new HashSet<>(Set.of(participants.get(9), participants.get(1), participants.get(3), participants.get(5)))));
         bookings.add(new Booking(400, tomorrow, tomorrow.plusHours(2), users.get(21), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
         bookings.add(new Booking(401, dayAfterTomorrow, dayAfterTomorrow.plusHours(1), users.get(21), activities.get(1), new HashSet<>(Set.of(participants.get(2), participants.get(4)))));
+
+
+        bookings.add(new Booking(413, fourDays.plusHours(3), fourDays.plusHours(6), users.get(22), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
+        bookings.add(new Booking(414, week.plusHours(1), week.plusHours(4), users.get(22), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
+        bookings.add(new Booking(415, weekAndADay.plusHours(2), weekAndADay.plusHours(5), users.get(22), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
+        bookings.add(new Booking(416, weekAndTwoDays.plusHours(3), weekAndTwoDays.plusHours(6), users.get(22), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
+        bookings.add(new Booking(417, twoWeeks.plusHours(1), twoWeeks.plusHours(4), users.get(22), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
+
+
+
 
         bookingRepository.saveAll(bookings);
     }
