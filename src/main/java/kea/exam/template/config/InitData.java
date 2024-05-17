@@ -104,17 +104,17 @@ public class InitData implements ApplicationRunner {
     }
 
     private void createProducts() {
-        products.add(new Product("Pepsi 33cl.", "https://www.maxgaming.dk/bilder/artiklar/21567.jpg?m=1652173726", 20, 100, categories.get(0)));
-        products.add(new Product("Coca Cola 33cl.", "https://www.maxgaming.dk/bilder/artiklar/zoom/26704_1.jpg?m=1678105407", 20, 80, categories.get(0)));
-        products.add(new Product("Fanta 33cl.", "https://www.maxgaming.dk/img/bilder/artiklar/26857.jpg?m=1679058529&w=720", 15, 60, categories.get(0)));
-        products.add(new Product("Sprite 33cl.", "https://lekalass.fr/48-large_default/sprite-33cl.jpg", 18, 70, categories.get(0)));
+        products.add(new Product("Pepsi 33cl.", "https://i.pinimg.com/originals/3d/c5/4e/3dc54e8f5df2eaa53ca93758d080b2f0.png", 20, 100, categories.get(0)));
+        products.add(new Product("Coca Cola 33cl.", "https://i.pinimg.com/originals/43/df/a2/43dfa2c7155ed3ed4f0ccdc490e0ca84.png", 20, 80, categories.get(0)));
+        products.add(new Product("Fanta 33cl.", "https://static.wixstatic.com/media/40ccf3_3632a83f249f4859bf0343de0d1c7999.png/v1/fill/w_360,h_876,al_c,lg_1,q_85,enc_auto/40ccf3_3632a83f249f4859bf0343de0d1c7999.png", 15, 60, categories.get(0)));
+        products.add(new Product("Sprite 33cl.", "https://i.pinimg.com/originals/91/be/8f/91be8f7fb628fe336f045049097d3642.png", 18, 70, categories.get(0)));
         products.add(new Product("Kim's Barbeque Chips", "https://kims.dk/wp-content/uploads/2019/09/Sweet-N-Juicy-Barbecue-Chips-170g.png", 25, 30, categories.get(1)));
         products.add(new Product("Kim's Saltede Chips", "https://kims.dk/wp-content/uploads/2021/02/Chips-Havsalt-170g.png", 25, 30, categories.get(1)));
-        products.add(new Product("Kim's Sour Cream Chips", "https://www.maxgaming.dk/bilder/artiklar/21567.jpg?m=1652173726", 25, 30, categories.get(1)));
-        products.add(new Product("Tuborg Classic", "https://billigfadoel.dk/wp-content/uploads/2018/11/Tuborg-Classic-25-cl-glasflaske-30-stk-bestil-hos-Billigfadoel.jpg", 20, 120, categories.get(2)));
-        products.add(new Product("Carlsberg", "https://billigfadoel.dk/wp-content/uploads/2018/11/Carlsberg-Pilsner-25-cl-glasflaske-30-stk-bestil-hos-Billigfadoel.jpg", 18, 100, categories.get(2)));
-        products.add(new Product("Heineken", "https://www.campoluzenoteca.com/5826-img_ppage/heineken-33cl-ep-caja-24.jpg", 25, 150, categories.get(2)));
-        products.add(new Product("Tom og Jerry Legetøj", "https://m.media-amazon.com/images/I/61dNq9wOdIL.jpg", 100, 10, categories.get(3)));
+        products.add(new Product("Kim's Sour Cream Chips", "https://kims.dk/wp-content/uploads/2020/10/Sour-Cream-Onion-Chips-170g.png.webp", 25, 30, categories.get(1)));
+        products.add(new Product("Tuborg Classic", "https://fadnord.dk/wp-content/uploads/sites/3/2019/01/64336-1.png", 20, 120, categories.get(2)));
+        products.add(new Product("Carlsberg", "https://bevco.b-cdn.net/media/5f/11/e5/1710251699/Carlsberg%20Pilsner%20Profil%2033%20cl.png?height=560&quality=99", 18, 100, categories.get(2)));
+        products.add(new Product("Heineken", "https://www.sp.com.pg/wp-content/uploads/2021/02/Heineken_Bottle-1.png", 25, 150, categories.get(2)));
+        products.add(new Product("Bowling Sæt Legetøj", "https://purepng.com/public/uploads/thumbnail/kids-toys-vd2.png", 100, 10, categories.get(3)));
 
         productRepository.saveAll(products);
 
@@ -261,8 +261,6 @@ public class InitData implements ApplicationRunner {
         bookings.add(new Booking(415, weekAndADay.plusHours(2), weekAndADay.plusHours(5), users.get(22), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
         bookings.add(new Booking(416, weekAndTwoDays.plusHours(3), weekAndTwoDays.plusHours(6), users.get(22), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
         bookings.add(new Booking(417, twoWeeks.plusHours(1), twoWeeks.plusHours(4), users.get(22), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
-
-
 
 
         bookingRepository.saveAll(bookings);
