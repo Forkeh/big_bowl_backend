@@ -18,4 +18,5 @@ public class Type {
     private String name;
 
     private Integer price;
+
 }

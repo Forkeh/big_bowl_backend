@@ -1,5 +1,6 @@
 package kea.exam.template.config;
 
+
 import kea.exam.template.activity.Activity;
 import kea.exam.template.activity.ActivityRepository;
 import kea.exam.template.booking.Booking;
@@ -21,6 +22,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,6 +41,7 @@ public class InitData implements ApplicationRunner {
     private final List<User> users = new ArrayList<>();
     private final List<Participant> participants = new ArrayList<>();
     List<BookingProduct> bookingProducts = new ArrayList<>();
+
 
     private final TypeRepository typeRepository;
     private final CategoryRepository categoryRepository;
@@ -61,6 +64,7 @@ public class InitData implements ApplicationRunner {
         this.bookingRepository = bookingRepository;
         this.participantRepository = participantRepository;
         this.bookingProductRepository = bookingProductRepository;
+
     }
 
 
@@ -81,6 +85,7 @@ public class InitData implements ApplicationRunner {
         createParticipants();
         createBookings();
         createBookingProducts();
+
     }
 
     private void createCategory() {

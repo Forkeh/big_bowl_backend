@@ -1,6 +1,5 @@
 package kea.exam.template.activity;
 
-
 import jakarta.persistence.*;
 import kea.exam.template.type.Type;
 import lombok.AllArgsConstructor;
@@ -14,7 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Activity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,4 +30,5 @@ public class Activity {
         this.isOpen = isOpen;
         this.type = type;
     }
+
 }

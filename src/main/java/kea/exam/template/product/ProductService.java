@@ -20,7 +20,6 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
@@ -67,6 +66,7 @@ public class ProductService {
 
         return productRepository.findAll(pageable)
                 .map(this::toDTO);
+
     }
 
     public ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO) {

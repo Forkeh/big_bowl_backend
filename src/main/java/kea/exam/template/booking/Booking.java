@@ -2,6 +2,7 @@ package kea.exam.template.booking;
 
 import jakarta.persistence.*;
 import kea.exam.template.activity.Activity;
+
 import kea.exam.template.booking_product.BookingProduct;
 import kea.exam.template.participant.Participant;
 import kea.exam.template.user.User;
@@ -45,9 +46,6 @@ public class Booking {
 
     @ManyToMany
     private Set<Participant> participants = new HashSet<>();
-
-    /*@ManyToMany
-    private Set<Product> products = new HashSet<>();*/
 
     @OneToMany
     @JoinColumn(name = "booking_id")

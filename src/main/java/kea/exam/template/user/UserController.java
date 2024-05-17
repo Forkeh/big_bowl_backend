@@ -1,5 +1,6 @@
 package kea.exam.template.user;
 
+
 import kea.exam.template.booking.BookingResponseDTO;
 import kea.exam.template.user.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/users")
@@ -30,8 +32,8 @@ public class UserController {
                 .buildAndExpand(createdUser.id())
                 .toUri();
 
+
         return ResponseEntity.created(location)
                 .body(createdUser);
     }
-
 }
