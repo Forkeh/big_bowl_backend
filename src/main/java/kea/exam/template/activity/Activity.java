@@ -1,8 +1,8 @@
 package kea.exam.template.activity;
 
-
 import jakarta.persistence.*;
 import kea.exam.template.type.Type;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,8 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Activity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,5 +24,11 @@ public class Activity {
     @ManyToOne
     @JoinColumn(name = "type_id")
     private Type type;
+
+    public Activity(String name, boolean isOpen, Type type) {
+        this.name = name;
+        this.isOpen = isOpen;
+        this.type = type;
+    }
 
 }
