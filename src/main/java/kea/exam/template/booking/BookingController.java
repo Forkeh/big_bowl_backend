@@ -35,4 +35,9 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.updateBookingParticipants(id, participantNames));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<BookingResponseDTO> deleteBookingById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(bookingService.deleteBookingById(id));
+    }
+
 }

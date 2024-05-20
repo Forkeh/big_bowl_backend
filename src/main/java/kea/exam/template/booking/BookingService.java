@@ -1,6 +1,7 @@
 package kea.exam.template.booking;
 
 import kea.exam.template.activity.ActivityService;
+import kea.exam.template.booking_product.BookingProductRepository;
 import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.participant.Participant;
 import kea.exam.template.participant.ParticipantRepository;
@@ -9,6 +10,7 @@ import kea.exam.template.product.ProductService;
 import kea.exam.template.product.dto.ProductBookingResponseDTO;
 import kea.exam.template.user.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +18,6 @@ import java.util.*;
 
 @Service
 public class BookingService {
-
 
     private final BookingRepository bookingRepository;
     private final UserService userService;
@@ -31,6 +32,7 @@ public class BookingService {
         this.activityService = activityService;
         this.productService = productService;
         this.participantRepository = participantRepository;
+
     }
 
     public List<BookingResponseDTO> getAllBookings() {
@@ -38,32 +40,6 @@ public class BookingService {
                 .stream()
                 .map(this::toDTO)
                 .toList();
-    }
-
-
-    public BookingResponseDTO toDTO(Booking entity) {
-        return new BookingResponseDTO(
-                entity.getId(),
-                entity.getTotalPrice(),
-                formatDate(entity.getStartTime()),
-                formatDate(entity.getEndTime()),
-                userService.toDTO(entity.getUser()),
-                activityService.toDTO(entity.getActivity()),
-                entity.getParticipants()
-                        .stream()
-                        .map(Participant::getName)
-                        .toList(),
-                entity.getProducts()
-                        .stream()
-                        .map(bookingProduct -> productService.productBookingResponseDTO(bookingProduct.getQuantity(), bookingProduct.getProduct()))
-                        .toList()
-        );
-    }
-
-
-    private String formatDate(LocalDateTime dateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        return dateTime.format(formatter);
     }
 
     public List<BookingResponseDTO> getBookingsByUserId(String id) {
@@ -94,5 +70,42 @@ public class BookingService {
 
         bookingRepository.save(booking);
         return toDTO(booking);
+    }
+
+    @Transactional
+    public BookingResponseDTO deleteBookingById(Long id) {
+        Booking bookingInDB = bookingRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Booking", id));
+        BookingResponseDTO responseDTO = toDTO(bookingInDB);
+
+        bookingRepository.deleteById(id);
+
+        return responseDTO;
+    }
+
+
+    public BookingResponseDTO toDTO(Booking entity) {
+        return new BookingResponseDTO(
+                entity.getId(),
+                entity.getTotalPrice(),
+                formatDate(entity.getStartTime()),
+                formatDate(entity.getEndTime()),
+                userService.toDTO(entity.getUser()),
+                activityService.toDTO(entity.getActivity()),
+                entity.getParticipants()
+                        .stream()
+                        .map(Participant::getName)
+                        .toList(),
+                entity.getProducts()
+                        .stream()
+                        .map(bookingProduct -> productService.productBookingResponseDTO(bookingProduct.getQuantity(), bookingProduct.getProduct()))
+                        .toList()
+        );
+    }
+
+
+    private String formatDate(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        return dateTime.format(formatter);
     }
 }
