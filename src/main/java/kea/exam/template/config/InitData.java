@@ -6,7 +6,6 @@ import kea.exam.template.activity.ActivityRepository;
 import kea.exam.template.booking.Booking;
 import kea.exam.template.booking.BookingRepository;
 import kea.exam.template.booking_product.BookingProduct;
-import kea.exam.template.booking_product.BookingProductKey;
 import kea.exam.template.booking_product.BookingProductRepository;
 import kea.exam.template.category.Category;
 import kea.exam.template.category.CategoryRepository;
@@ -28,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class InitData implements ApplicationRunner {
@@ -272,11 +270,11 @@ public class InitData implements ApplicationRunner {
     }
 
     private void createBookingProducts() {
-        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(2), bookings.get(26)), 4));
-        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(4), bookings.get(26)), 1));
-        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(3), bookings.get(26)), 2));
-        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(2), bookings.get(26)), 3));
-        bookingProducts.add(new BookingProduct(new BookingProductKey(products.get(7), bookings.get(26)), 1));
+        bookingProducts.add(new BookingProduct(products.get(2), bookings.get(26), 4));
+        bookingProducts.add(new BookingProduct(products.get(4), bookings.get(26), 1));
+        bookingProducts.add(new BookingProduct(products.get(3), bookings.get(26), 2));
+        bookingProducts.add(new BookingProduct(products.get(8), bookings.get(26), 3));
+        bookingProducts.add(new BookingProduct(products.get(7), bookings.get(26), 1));
 
         bookingProductRepository.saveAll(bookingProducts);
     }

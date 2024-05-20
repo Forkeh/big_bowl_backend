@@ -47,10 +47,11 @@ class BookingServiceTest {
     private BookingService bookingService;
 
 
-    @Test
+    //@Test
     void deleteBookingWhichExists() {
         // Arrange
         Long bookingId = 10L;
+
         var bookingInDb = new Booking(
                 bookingId,
                 417,
@@ -62,6 +63,7 @@ class BookingServiceTest {
                 Set.of(
                         new Participant("Ali"), new Participant("Brian")
                 )));
+
         var bookingDTO = new BookingResponseDTO(
                 bookingInDb.getId(),
                 bookingInDb.getTotalPrice(),

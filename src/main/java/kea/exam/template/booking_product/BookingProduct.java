@@ -15,24 +15,22 @@ import lombok.Setter;
 @Entity
 public class BookingProduct {
 
-    @EmbeddedId
-    private BookingProductKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private Product product;
+
+    @ManyToOne
+    private Booking booking;
 
     private int quantity;
 
-    public Product getProduct() {
-        return id.getProduct();
+    public BookingProduct(Product product, Booking booking, int quantity) {
+        this.product = product;
+        this.booking = booking;
+        this.quantity = quantity;
     }
 
-    public void setProduct(Product product) {
-        id.setProduct(product);
-    }
-
-    public Booking getBooking() {
-        return id.getBooking();
-    }
-
-    public void setBooking(Booking booking) {
-        id.setBooking(booking);
-    }
 }

@@ -19,23 +19,20 @@ import java.util.*;
 @Service
 public class BookingService {
 
-
     private final BookingRepository bookingRepository;
     private final UserService userService;
     private final ActivityService activityService;
     private final ProductService productService;
     private final ParticipantRepository participantRepository;
-    private final BookingProductRepository bookingProductRepository;
 
 
-    public BookingService(BookingRepository bookingRepository, UserService userService, ActivityService activityService, ProductService productService, ParticipantRepository participantRepository,
-                          BookingProductRepository bookingProductRepository) {
+    public BookingService(BookingRepository bookingRepository, UserService userService, ActivityService activityService, ProductService productService, ParticipantRepository participantRepository) {
         this.bookingRepository = bookingRepository;
         this.userService = userService;
         this.activityService = activityService;
         this.productService = productService;
         this.participantRepository = participantRepository;
-        this.bookingProductRepository = bookingProductRepository;
+
     }
 
     public List<BookingResponseDTO> getAllBookings() {
@@ -81,9 +78,7 @@ public class BookingService {
                 .orElseThrow(() -> new EntityNotFoundException("Booking", id));
         BookingResponseDTO responseDTO = toDTO(bookingInDB);
 
-        //bookingProductRepository.deleteAllByBookingId(id);
         bookingRepository.deleteById(id);
-
 
         return responseDTO;
     }
