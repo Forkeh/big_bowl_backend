@@ -1,13 +1,11 @@
 package kea.exam.template.booking;
 
 import kea.exam.template.activity.ActivityService;
-import kea.exam.template.booking_product.BookingProductRepository;
+import kea.exam.template.booking.dto.BookingResponseDTO;
 import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.participant.Participant;
 import kea.exam.template.participant.ParticipantRepository;
-import kea.exam.template.product.Product;
 import kea.exam.template.product.ProductService;
-import kea.exam.template.product.dto.ProductBookingResponseDTO;
 import kea.exam.template.user.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

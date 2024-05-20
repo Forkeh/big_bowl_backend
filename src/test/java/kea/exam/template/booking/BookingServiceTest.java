@@ -3,11 +3,10 @@ package kea.exam.template.booking;
 import kea.exam.template.activity.Activity;
 import kea.exam.template.activity.ActivityService;
 import kea.exam.template.activity.dto.ActivityResponseDTO;
+import kea.exam.template.booking.dto.BookingResponseDTO;
 import kea.exam.template.booking_product.BookingProductRepository;
-import kea.exam.template.exceptions.BadRequestException;
 import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.participant.Participant;
-import kea.exam.template.product.dto.ProductResponseDTO;
 import kea.exam.template.user.User;
 import kea.exam.template.user.UserService;
 import kea.exam.template.user.dto.UserDTO;
@@ -55,33 +54,43 @@ class BookingServiceTest {
         var bookingInDb = new Booking(
                 bookingId,
                 417,
-                LocalDateTime.now().plusHours(1),
-                LocalDateTime.now().plusHours(4),
+                LocalDateTime.now()
+                        .plusHours(1),
+                LocalDateTime.now()
+                        .plusHours(4),
                 new User("1", "first", "last"),
                 new Activity(),
                 new HashSet<>(
-                Set.of(
-                        new Participant("Ali"), new Participant("Brian")
-                )));
+                        Set.of(
+                                new Participant("Ali"), new Participant("Brian")
+                        )));
 
         var bookingDTO = new BookingResponseDTO(
                 bookingInDb.getId(),
                 bookingInDb.getTotalPrice(),
-                bookingInDb.getStartTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")),
-                bookingInDb.getEndTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")),
+                bookingInDb.getStartTime()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")),
+                bookingInDb.getEndTime()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")),
                 new UserDTO("1", "first", "last"),
                 new ActivityResponseDTO(null, null, null, null, null),
-                bookingInDb.getParticipants().stream().map(Participant::getName).toList(),
+                bookingInDb.getParticipants()
+                        .stream()
+                        .map(Participant::getName)
+                        .toList(),
                 new ArrayList<>()
         );
-        
-        Mockito.when(bookingRepository.findById(bookingId)).thenReturn(Optional.of(bookingInDb));
-        Mockito.when(userService.toDTO(bookingInDb.getUser())).thenReturn(bookingDTO.user());
-        Mockito.when(activityService.toDTO(bookingInDb.getActivity())).thenReturn(bookingDTO.activity());
+
+        Mockito.when(bookingRepository.findById(bookingId))
+                .thenReturn(Optional.of(bookingInDb));
+        Mockito.when(userService.toDTO(bookingInDb.getUser()))
+                .thenReturn(bookingDTO.user());
+        Mockito.when(activityService.toDTO(bookingInDb.getActivity()))
+                .thenReturn(bookingDTO.activity());
         //Mockito.when(bookingProductRepository.deleteAllByBookingId(bookingId)).thenReturn(null);
         //Mockito.when(bookingRepository.delete(bookingInDb)).thenReturn(null);
-        Mockito.when(bookingService.toDTO(bookingInDb)).thenReturn(bookingDTO);
-
+        Mockito.when(bookingService.toDTO(bookingInDb))
+                .thenReturn(bookingDTO);
 
 
         // Act
@@ -95,7 +104,8 @@ class BookingServiceTest {
     void deleteBookingWitchDoesNotExist() {
         // Arrange
         Long bookingId = 10L;
-        Mockito.when(bookingRepository.findById(bookingId)).thenReturn(Optional.empty());
+        Mockito.when(bookingRepository.findById(bookingId))
+                .thenReturn(Optional.empty());
 
         // Act and Assert
         assertThrows(EntityNotFoundException.class, () -> bookingService.deleteBookingById(bookingId));
