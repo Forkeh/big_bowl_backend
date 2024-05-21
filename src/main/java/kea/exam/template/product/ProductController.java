@@ -26,8 +26,8 @@ public class ProductController {
     public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
             @RequestParam Integer pageIndex,
             @RequestParam Integer pageSize,
-            @RequestParam String sortDir,
-            @RequestParam String sortBy,
+            @RequestParam Optional<String> sortDir,
+            @RequestParam Optional<String> sortBy,
             @RequestParam Optional<String> filterBy,
             @RequestParam Optional<String> searchBy
     ) {
@@ -45,7 +45,8 @@ public class ProductController {
                 .buildAndExpand(createdProduct.id())
                 .toUri();
 
-        return ResponseEntity.created(location).body(createdProduct);
+        return ResponseEntity.created(location)
+                .body(createdProduct);
     }
 
     @PutMapping("/{id}")
