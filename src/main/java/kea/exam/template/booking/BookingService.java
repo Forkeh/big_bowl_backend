@@ -1,6 +1,7 @@
 package kea.exam.template.booking;
 
 import kea.exam.template.activity.ActivityService;
+import kea.exam.template.booking.dto.BookingOccupiedTimesResponseDTO;
 import kea.exam.template.booking.dto.BookingResponseDTO;
 import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.participant.Participant;
@@ -10,7 +11,10 @@ import kea.exam.template.user.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -105,5 +109,30 @@ public class BookingService {
     private String formatDate(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         return dateTime.format(formatter);
+    }
+
+    public List<BookingOccupiedTimesResponseDTO> getOccupiedBookingTimes(Long activityId, LocalDate localDate) {
+        List<Booking> bookingsInDB = bookingRepository.findAllByStartTimeBetweenAndActivityId(
+                LocalDateTime.of(localDate, LocalTime.MIN),
+                LocalDateTime.of(localDate, LocalTime.MAX),
+                activityId
+        );
+
+        List<BookingOccupiedTimesResponseDTO> result = new ArrayList<>();
+
+        for (Booking booking : bookingsInDB) {
+            var start = booking.getStartTime();
+            var end = booking.getEndTime();
+
+            Long duration = Duration.between(start, end).toHours();
+            String startTime = start.getHour() + ":00";
+
+            result.add(new BookingOccupiedTimesResponseDTO(
+                    duration,
+                    startTime
+            ));
+        }
+
+        return result;
     }
 }

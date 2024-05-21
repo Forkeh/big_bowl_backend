@@ -22,7 +22,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -209,24 +211,24 @@ public class InitData implements ApplicationRunner {
     }
 
     private void createBookings() {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime tomorrow = LocalDateTime.now()
+        LocalDateTime now = LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 0));
+        LocalDateTime tomorrow = now
                 .plusDays(1);
-        LocalDateTime dayAfterTomorrow = LocalDateTime.now()
+        LocalDateTime dayAfterTomorrow = now
                 .plusDays(2);
-        LocalDateTime threeDays = LocalDateTime.now()
+        LocalDateTime threeDays = now
                 .plusDays(3);
-        LocalDateTime fourDays = LocalDateTime.now()
-                .plusDays(3);
-        LocalDateTime week = LocalDateTime.now()
+        LocalDateTime fourDays = now
+                .plusDays(4);
+        LocalDateTime week = now
                 .plusWeeks(1);
-        LocalDateTime weekAndADay = LocalDateTime.now()
+        LocalDateTime weekAndADay = now
                 .plusWeeks(1)
                 .plusDays(1);
-        LocalDateTime weekAndTwoDays = LocalDateTime.now()
+        LocalDateTime weekAndTwoDays = now
                 .plusWeeks(1)
                 .plusDays(2);
-        LocalDateTime twoWeeks = LocalDateTime.now()
+        LocalDateTime twoWeeks = now
                 .plusWeeks(2);
 
         bookings.add(new Booking(400, tomorrow, tomorrow.plusHours(2), users.get(2), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
@@ -238,32 +240,32 @@ public class InitData implements ApplicationRunner {
         bookings.add(new Booking(406, weekAndTwoDays, weekAndTwoDays.plusHours(2), users.get(8), activities.get(0), new HashSet<>(Set.of(participants.get(2), participants.get(9)))));
         bookings.add(new Booking(407, twoWeeks, twoWeeks.plusHours(1), users.get(9), activities.get(1), new HashSet<>(Set.of(participants.get(3), participants.get(0)))));
         bookings.add(new Booking(408, now.plusHours(5), now.plusHours(7), users.get(0), activities.get(2), new HashSet<>(Set.of(participants.get(4), participants.get(5)))));
-        bookings.add(new Booking(409, now.plusDays(3)
-                .plusHours(2), now.plusDays(3)
+        bookings.add(new Booking(409, now.plusDays(8)
+                .plusHours(3), now.plusDays(8)
                 .plusHours(4), users.get(1), activities.get(3), new HashSet<>(Set.of(participants.get(6), participants.get(7)))));
-        bookings.add(new Booking(410, tomorrow.plusHours(3), tomorrow.plusHours(6), users.get(2), activities.get(1), new HashSet<>(Set.of(participants.get(0), participants.get(2), participants.get(4)))));
-        bookings.add(new Booking(411, dayAfterTomorrow.plusHours(1), dayAfterTomorrow.plusHours(4), users.get(3), activities.get(2), new HashSet<>(Set.of(participants.get(1), participants.get(3), participants.get(5)))));
-        bookings.add(new Booking(412, threeDays.plusHours(4), threeDays.plusHours(7), users.get(4), activities.get(3), new HashSet<>(Set.of(participants.get(2), participants.get(4), participants.get(6)))));
-        bookings.add(new Booking(413, fourDays.plusHours(3), fourDays.plusHours(6), users.get(5), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
-        bookings.add(new Booking(414, week.plusHours(1), week.plusHours(4), users.get(6), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
-        bookings.add(new Booking(415, weekAndADay.plusHours(2), weekAndADay.plusHours(5), users.get(7), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
-        bookings.add(new Booking(416, weekAndTwoDays.plusHours(3), weekAndTwoDays.plusHours(6), users.get(8), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
-        bookings.add(new Booking(417, twoWeeks.plusHours(1), twoWeeks.plusHours(4), users.get(9), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
-        bookings.add(new Booking(418, now.plusDays(1)
-                .plusHours(2), now.plusDays(1)
-                .plusHours(5), users.get(0), activities.get(4), new HashSet<>(Set.of(participants.get(8), participants.get(0), participants.get(2), participants.get(4)))));
-        bookings.add(new Booking(419, now.plusDays(2)
-                .plusHours(3), now.plusDays(2)
-                .plusHours(6), users.get(1), activities.get(0), new HashSet<>(Set.of(participants.get(9), participants.get(1), participants.get(3), participants.get(5)))));
-        bookings.add(new Booking(400, tomorrow, tomorrow.plusHours(2), users.get(21), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
-        bookings.add(new Booking(401, dayAfterTomorrow, dayAfterTomorrow.plusHours(1), users.get(21), activities.get(1), new HashSet<>(Set.of(participants.get(2), participants.get(4)))));
+        bookings.add(new Booking(410, tomorrow.plusHours(10), tomorrow.plusHours(11), users.get(2), activities.get(1), new HashSet<>(Set.of(participants.get(0), participants.get(2), participants.get(4)))));
+        bookings.add(new Booking(411, dayAfterTomorrow.plusHours(4), dayAfterTomorrow.plusHours(5), users.get(3), activities.get(2), new HashSet<>(Set.of(participants.get(1), participants.get(3), participants.get(5)))));
+        bookings.add(new Booking(412, threeDays.plusHours(4), threeDays.plusHours(5), users.get(4), activities.get(3), new HashSet<>(Set.of(participants.get(2), participants.get(4), participants.get(6)))));
+        bookings.add(new Booking(413, fourDays.plusHours(3), fourDays.plusHours(4), users.get(5), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
+        bookings.add(new Booking(414, week.plusHours(7), week.plusHours(8), users.get(6), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
+        bookings.add(new Booking(415, weekAndADay, weekAndADay.plusHours(2), users.get(7), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
+        bookings.add(new Booking(416, weekAndTwoDays.plusHours(3), weekAndTwoDays.plusHours(4), users.get(8), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
+        bookings.add(new Booking(417, twoWeeks.plusHours(1), twoWeeks.plusHours(2), users.get(9), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
+        bookings.add(new Booking(418, now.plusDays(23)
+                .plusHours(2), now.plusDays(23)
+                .plusHours(4), users.get(0), activities.get(4), new HashSet<>(Set.of(participants.get(8), participants.get(0), participants.get(2), participants.get(4)))));
+        bookings.add(new Booking(419, now.plusDays(20)
+                .plusHours(3), now.plusDays(20)
+                .plusHours(4), users.get(1), activities.get(0), new HashSet<>(Set.of(participants.get(9), participants.get(1), participants.get(3), participants.get(5)))));
+        bookings.add(new Booking(400, tomorrow.plusDays(12), tomorrow.plusDays(12).plusHours(2), users.get(21), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
+        bookings.add(new Booking(401, dayAfterTomorrow.plusHours(9), dayAfterTomorrow.plusHours(10), users.get(21), activities.get(1), new HashSet<>(Set.of(participants.get(2), participants.get(4)))));
 
 
-        bookings.add(new Booking(413, fourDays.plusHours(3), fourDays.plusHours(6), users.get(22), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
-        bookings.add(new Booking(414, week.plusHours(1), week.plusHours(4), users.get(22), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
-        bookings.add(new Booking(415, weekAndADay.plusHours(2), weekAndADay.plusHours(5), users.get(22), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
-        bookings.add(new Booking(416, weekAndTwoDays.plusHours(3), weekAndTwoDays.plusHours(6), users.get(22), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
-        bookings.add(new Booking(417, twoWeeks.plusHours(1), twoWeeks.plusHours(4), users.get(22), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
+        bookings.add(new Booking(413, fourDays.plusHours(6), fourDays.plusHours(7), users.get(22), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
+        bookings.add(new Booking(414, week.plusDays(11).plusHours(1), week.plusDays(11).plusHours(2), users.get(22), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
+        bookings.add(new Booking(415, weekAndADay.plusDays(12).plusHours(2), weekAndADay.plusDays(12).plusHours(3), users.get(22), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
+        bookings.add(new Booking(416, weekAndTwoDays.plusDays(15).plusHours(3), weekAndTwoDays.plusDays(15).plusHours(4), users.get(22), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
+        bookings.add(new Booking(417, twoWeeks.plusDays(1).plusHours(1), twoWeeks.plusDays(1).plusHours(2), users.get(22), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
 
 
         bookingRepository.saveAll(bookings);

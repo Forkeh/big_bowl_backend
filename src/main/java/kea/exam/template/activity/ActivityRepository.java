@@ -12,4 +12,6 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
     Page<Activity> findAllByTypeNameContainsIgnoreCase(Pageable pageable, String name);
 
     List<Activity> findAllByTypeNameContainsIgnoreCase(String name);
+
+    List<Activity> findAllByTypeName(String typeName);
 }
