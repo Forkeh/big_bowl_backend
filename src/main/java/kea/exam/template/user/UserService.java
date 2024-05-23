@@ -17,7 +17,7 @@ public class UserService {
 
     }
 
-    private Optional<User> findUserById(String id) {
+    public Optional<User> findUserById(String id) {
         return userRepository.findById(id);
     }
 

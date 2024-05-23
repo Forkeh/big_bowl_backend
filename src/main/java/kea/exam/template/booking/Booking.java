@@ -66,4 +66,5 @@ public class Booking {
         this(null, totalPrice, startTime, endTime, user, activity, participants);
     }
 
+
 }

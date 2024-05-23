@@ -1,6 +1,7 @@
 package kea.exam.template.booking;
 
 import kea.exam.template.booking.dto.BookingOccupiedTimesResponseDTO;
+import kea.exam.template.booking.dto.BookingRequestDTO;
 import kea.exam.template.booking.dto.BookingResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,10 +49,15 @@ public class BookingController {
     public ResponseEntity<List<BookingOccupiedTimesResponseDTO>> getOccupiedBookingTimes(
             @RequestParam Long activityId,
             @RequestParam String date
-            ) {
+    ) {
 
         var localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
         return ResponseEntity.ok(bookingService.getOccupiedBookingTimes(activityId, localDate));
+    }
+
+    @PostMapping
+    public ResponseEntity<BookingResponseDTO> createBooking(@RequestBody BookingRequestDTO booking) {
+        return ResponseEntity.ok(bookingService.createBooking(booking));
     }
 }
