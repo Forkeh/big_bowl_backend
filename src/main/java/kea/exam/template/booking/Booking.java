@@ -51,14 +51,6 @@ public class Booking {
     @JoinColumn(name = "booking_id")
     private Set<BookingProduct> products = new HashSet<>();
 
-    public Booking(double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
-        this.totalPrice = totalPrice;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.user = user;
-        this.activity = activity;
-        this.participants = participants;
-    }
 
     public Booking(Long id, double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
         this.id = id;
@@ -68,7 +60,10 @@ public class Booking {
         this.user = user;
         this.activity = activity;
         this.participants = participants;
-        this.products = products;
+    }
+
+    public Booking(double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
+        this(null, totalPrice, startTime, endTime, user, activity, participants);
     }
 
 

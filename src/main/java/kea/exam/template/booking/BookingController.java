@@ -1,9 +1,13 @@
 package kea.exam.template.booking;
 
+import kea.exam.template.booking.dto.BookingOccupiedTimesResponseDTO;
+import kea.exam.template.booking.dto.BookingRequestDTO;
+import kea.exam.template.booking.dto.BookingResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -40,4 +44,20 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.deleteBookingById(id));
     }
 
+
+    @GetMapping("times")
+    public ResponseEntity<List<BookingOccupiedTimesResponseDTO>> getOccupiedBookingTimes(
+            @RequestParam Long activityId,
+            @RequestParam String date
+    ) {
+
+        var localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+        return ResponseEntity.ok(bookingService.getOccupiedBookingTimes(activityId, localDate));
+    }
+
+    @PostMapping
+    public ResponseEntity<BookingResponseDTO> createBooking(@RequestBody BookingRequestDTO booking) {
+        return ResponseEntity.ok(bookingService.createBooking(booking));
+    }
 }

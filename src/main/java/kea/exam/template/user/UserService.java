@@ -1,15 +1,9 @@
 package kea.exam.template.user;
 
 
-import kea.exam.template.booking.Booking;
-import kea.exam.template.booking.BookingRepository;
-import kea.exam.template.booking.BookingResponseDTO;
-import kea.exam.template.booking.BookingService;
-import kea.exam.template.exceptions.EntityNotFoundException;
 import kea.exam.template.user.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +17,7 @@ public class UserService {
 
     }
 
-    private Optional<User> findUserById(String id) {
+    public Optional<User> findUserById(String id) {
         return userRepository.findById(id);
     }
 
