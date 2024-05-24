@@ -31,8 +31,8 @@ public class ProductService {
     public Page<ProductResponseDTO> getAllProducts(
             Integer pageNum,
             Integer pageSize,
-            String sortDir,
-            String sortBy,
+            Optional<String> sortDir,
+            Optional<String> sortBy,
             Optional<String> filterBy,
             Optional<String> searchBy
     ) {
@@ -40,8 +40,8 @@ public class ProductService {
         Pageable pageable = PageRequest.of(
                 pageNum,
                 pageSize,
-                Sort.Direction.valueOf(sortDir),
-                sortBy
+                Sort.Direction.valueOf(sortDir.orElse("ASC")),
+                sortBy.orElse("id")
         );
 
 

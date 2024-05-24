@@ -88,4 +88,7 @@ public class ActivityService {
     }
 
 
+    public List<ActivityResponseDTO> getAllActivitiesByType(String id) {
+        return activityRepository.findAllByTypeName(id).stream().map(this::toDTO).toList();
+    }
 }

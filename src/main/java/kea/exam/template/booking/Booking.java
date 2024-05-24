@@ -47,11 +47,13 @@ public class Booking {
     @ManyToMany
     private Set<Participant> participants = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "booking_id")
     private Set<BookingProduct> products = new HashSet<>();
 
-    public Booking(double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
+
+    public Booking(Long id, double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
+        this.id = id;
         this.totalPrice = totalPrice;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -59,4 +61,10 @@ public class Booking {
         this.activity = activity;
         this.participants = participants;
     }
+
+    public Booking(double totalPrice, LocalDateTime startTime, LocalDateTime endTime, User user, Activity activity, Set<Participant> participants) {
+        this(null, totalPrice, startTime, endTime, user, activity, participants);
+    }
+
+
 }
