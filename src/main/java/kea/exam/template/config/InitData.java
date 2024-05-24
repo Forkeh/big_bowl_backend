@@ -100,7 +100,7 @@ public class InitData implements ApplicationRunner {
 
 
     private void createType() {
-        types.add(new Type("Bowling Standard", 200));
+        types.add(new Type("Bowling Voksen", 200));
         types.add(new Type("Bowling Junior", 100));
         types.add(new Type("Air Hockey", 150));
         types.add(new Type("Spisning", 50));
@@ -126,42 +126,42 @@ public class InitData implements ApplicationRunner {
     }
 
     private void createActivities() {
-        activities.add(new Activity("Bowling lane 1", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 2", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 3", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 4", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 5", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 6", false, types.get(0)));
-        activities.add(new Activity("Bowling lane 7", false, types.get(0)));
-        activities.add(new Activity("Bowling lane 8", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 9", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 10", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 11", false, types.get(0)));
-        activities.add(new Activity("Bowling lane 12", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 13", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 14", false, types.get(0)));
-        activities.add(new Activity("Bowling lane 15", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 16", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 17", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 18", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 19", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 20", true, types.get(0)));
-        activities.add(new Activity("Bowling lane 21", true, types.get(1)));
-        activities.add(new Activity("Bowling lane 22", true, types.get(1)));
-        activities.add(new Activity("Bowling lane 23", true, types.get(1)));
-        activities.add(new Activity("Bowling lane 24", false, types.get(1)));
+        activities.add(new Activity("Bowling bane 1", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 2", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 3", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 4", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 5", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 6", false, types.get(0)));
+        activities.add(new Activity("Bowling bane 7", false, types.get(0)));
+        activities.add(new Activity("Bowling bane 8", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 9", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 10", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 11", false, types.get(0)));
+        activities.add(new Activity("Bowling bane 12", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 13", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 14", false, types.get(0)));
+        activities.add(new Activity("Bowling bane 15", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 16", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 17", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 18", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 19", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 20", true, types.get(0)));
+        activities.add(new Activity("Bowling bane 21", true, types.get(1)));
+        activities.add(new Activity("Bowling bane 22", true, types.get(1)));
+        activities.add(new Activity("Bowling bane 23", true, types.get(1)));
+        activities.add(new Activity("Bowling bane 24", false, types.get(1)));
 
-        activities.add(new Activity("Air Hockey 1", true, types.get(2)));
-        activities.add(new Activity("Air Hockey 2", true, types.get(2)));
-        activities.add(new Activity("Air Hockey 3", false, types.get(2)));
-        activities.add(new Activity("Air Hockey 4", true, types.get(2)));
+        activities.add(new Activity("Air hockey 1", true, types.get(2)));
+        activities.add(new Activity("Air hockey 2", true, types.get(2)));
+        activities.add(new Activity("Air hockey 3", false, types.get(2)));
+        activities.add(new Activity("Air hockey 4", true, types.get(2)));
 
-        activities.add(new Activity("Dining 1", true, types.get(3)));
-        activities.add(new Activity("Dining 2", true, types.get(3)));
-        activities.add(new Activity("Dining 3", false, types.get(3)));
-        activities.add(new Activity("Dining 4", true, types.get(3)));
-        activities.add(new Activity("Dining 5", true, types.get(3)));
-        activities.add(new Activity("Dining 6", true, types.get(3)));
+        activities.add(new Activity("Spisebord 1", true, types.get(3)));
+        activities.add(new Activity("Spisebord 2", true, types.get(3)));
+        activities.add(new Activity("Spisebord 3", false, types.get(3)));
+        activities.add(new Activity("Spisebord 4", true, types.get(3)));
+        activities.add(new Activity("Spisebord 5", true, types.get(3)));
+        activities.add(new Activity("Spisebord 6", true, types.get(3)));
 
         activityRepository.saveAll(activities);
     }
@@ -257,15 +257,24 @@ public class InitData implements ApplicationRunner {
         bookings.add(new Booking(419, now.plusDays(20)
                 .plusHours(3), now.plusDays(20)
                 .plusHours(4), users.get(1), activities.get(0), new HashSet<>(Set.of(participants.get(9), participants.get(1), participants.get(3), participants.get(5)))));
-        bookings.add(new Booking(400, tomorrow.plusDays(12), tomorrow.plusDays(12).plusHours(2), users.get(21), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
+        bookings.add(new Booking(400, tomorrow.plusDays(12), tomorrow.plusDays(12)
+                .plusHours(2), users.get(21), activities.get(0), new HashSet<>(Set.of(participants.get(1), participants.get(3)))));
         bookings.add(new Booking(401, dayAfterTomorrow.plusHours(9), dayAfterTomorrow.plusHours(10), users.get(21), activities.get(1), new HashSet<>(Set.of(participants.get(2), participants.get(4)))));
 
 
         bookings.add(new Booking(413, fourDays.plusHours(6), fourDays.plusHours(7), users.get(22), activities.get(4), new HashSet<>(Set.of(participants.get(3), participants.get(5), participants.get(7)))));
-        bookings.add(new Booking(414, week.plusDays(11).plusHours(1), week.plusDays(11).plusHours(2), users.get(22), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
-        bookings.add(new Booking(415, weekAndADay.plusDays(12).plusHours(2), weekAndADay.plusDays(12).plusHours(3), users.get(22), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
-        bookings.add(new Booking(416, weekAndTwoDays.plusDays(15).plusHours(3), weekAndTwoDays.plusDays(15).plusHours(4), users.get(22), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
-        bookings.add(new Booking(417, twoWeeks.plusDays(1).plusHours(1), twoWeeks.plusDays(1).plusHours(2), users.get(22), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
+        bookings.add(new Booking(414, week.plusDays(11)
+                .plusHours(1), week.plusDays(11)
+                .plusHours(2), users.get(22), activities.get(0), new HashSet<>(Set.of(participants.get(4), participants.get(6), participants.get(8)))));
+        bookings.add(new Booking(415, weekAndADay.plusDays(12)
+                .plusHours(2), weekAndADay.plusDays(12)
+                .plusHours(3), users.get(22), activities.get(1), new HashSet<>(Set.of(participants.get(5), participants.get(7), participants.get(9)))));
+        bookings.add(new Booking(416, weekAndTwoDays.plusDays(15)
+                .plusHours(3), weekAndTwoDays.plusDays(15)
+                .plusHours(4), users.get(22), activities.get(2), new HashSet<>(Set.of(participants.get(6), participants.get(8), participants.get(0)))));
+        bookings.add(new Booking(417, twoWeeks.plusDays(1)
+                .plusHours(1), twoWeeks.plusDays(1)
+                .plusHours(2), users.get(22), activities.get(3), new HashSet<>(Set.of(participants.get(7), participants.get(9), participants.get(1)))));
 
 
         bookingRepository.saveAll(bookings);
