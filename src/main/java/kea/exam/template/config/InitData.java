@@ -278,6 +278,7 @@ public class InitData implements ApplicationRunner {
 
 
         bookingRepository.saveAll(bookings);
+
     }
 
     private void createBookingProducts() {
