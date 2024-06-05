@@ -283,6 +283,8 @@ public class InitData implements ApplicationRunner {
 
 
 
+
+
     }
 
     private void createBookingProducts() {
